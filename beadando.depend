@@ -1,0 +1,31 @@
+# depslib dependency file v1.0
+1792956620 source:h:\egyetem\c++\beadando\aru.cpp
+	<iostream>
+	<string>
+	"aru.hpp"
+
+1792952636 h:\egyetem\c++\beadando\aru.hpp
+	<string>
+
+1792956527 source:h:\egyetem\c++\beadando\main.cpp
+	<iostream>
+	"aru.hpp"
+	"darab_aru.hpp"
+
+1792953431 source:h:\egyetem\c++\beadando\darab_aru.cpp
+	<iostream>
+	<string>
+	"darab_aru.hpp"
+
+1792956588 h:\egyetem\c++\beadando\darab_aru.hpp
+	<string>
+	"aru.hpp"
+
+1792953862 source:h:\egyetem\c++\beadando\ledig.cpp
+	<iostream>
+	<string>
+	"ledig.hpp"
+
+1792953712 h:\egyetem\c++\beadando\ledig.hpp
+	"aru.hpp"
+
