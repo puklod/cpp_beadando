@@ -6,7 +6,7 @@
 
 class DarabAru : public Aru {
 public:
-    DarabAru(string nev, string gyarto, string arukod, int ar, int raktarKeszlet);
+    DarabAru(string nev, string gyarto, string aruKod, int ar, int raktarKeszlet);
     string toString() override;
 private:
     void setKod(string kod);

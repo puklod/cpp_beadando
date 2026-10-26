@@ -1,32 +1,35 @@
 # depslib dependency file v1.0
-1792956620 source:h:\egyetem\c++\beadando\aru.cpp
+1793047798 source:h:\egyetem\c++\beadando\aru.cpp
 	<iostream>
 	<string>
 	"aru.hpp"
 
-1792952636 h:\egyetem\c++\beadando\aru.hpp
+1793045186 h:\egyetem\c++\beadando\aru.hpp
 	<string>
 
-1792956527 source:h:\egyetem\c++\beadando\main.cpp
+1793047898 source:h:\egyetem\c++\beadando\main.cpp
 	<iostream>
 	"aru.hpp"
 	"darab_aru.hpp"
+	"ledig.hpp"
+	"menu.hpp"
 
-1792953431 source:h:\egyetem\c++\beadando\darab_aru.cpp
+1793040570 source:h:\egyetem\c++\beadando\darab_aru.cpp
 	<iostream>
 	<string>
+	"aru.hpp"
 	"darab_aru.hpp"
 
-1792956588 h:\egyetem\c++\beadando\darab_aru.hpp
+1793040475 h:\egyetem\c++\beadando\darab_aru.hpp
 	<string>
 	"aru.hpp"
 
-1792953862 source:h:\egyetem\c++\beadando\ledig.cpp
+1793040527 source:h:\egyetem\c++\beadando\ledig.cpp
 	<iostream>
 	<string>
 	"ledig.hpp"
 
-1792953712 h:\egyetem\c++\beadando\ledig.hpp
+1793040508 h:\egyetem\c++\beadando\ledig.hpp
 	"aru.hpp"
 
 1793013427 source:e:\egyetem\cpp\cpp_beadando\aru.cpp
@@ -81,4 +84,25 @@
 	<string>
 	"raktar.hpp"
 	"aru.hpp"
+
+1793048203 source:h:\egyetem\c++\beadando\menu.cpp
+	<iostream>
+	"menu.hpp"
+
+1793049761 h:\egyetem\c++\beadando\menu.hpp
+	"raktar.hpp"
+
+1793047726 h:\egyetem\c++\beadando\raktar.hpp
+	<unordered_map>
+	<string>
+	"aru.hpp"
+
+1793047613 source:h:\egyetem\c++\beadando\raktar.cpp
+	<iostream>
+	<list>
+	<string>
+	"raktar.hpp"
+	"aru.hpp"
+	"ledig.hpp"
+	"darab_aru.hpp"
 

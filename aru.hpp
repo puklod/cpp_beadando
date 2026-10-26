@@ -7,11 +7,12 @@ using namespace std;
 
 class Aru{
 public:
-    Aru(string nev, string gyarto, string arukod, int ar, int raktarKeszlet);
+    Aru(string nev, string gyarto, string aruKod, int ar, int raktarKeszlet);
+    virtual ~Aru() = default;
     virtual string toString();
-    string arukod();
+    string aruKod();
     int ar();
-    int raktarKeszlet();
+    int& raktarKeszlet();
 
 private:
     string mNev;

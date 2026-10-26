@@ -3,21 +3,65 @@
 #include <string>
 #include "raktar.hpp"
 #include "aru.hpp"
+#include "ledig.hpp"
+#include "darab_aru.hpp"
 
 using namespace std;
 
-void Raktar::hozzaad(Aru* aru){
+void Raktar::hozzaad(string aruKod, Aru* aruReferencia){
 
-    mAruLista.push_back(aru);
+    mRaktarKeszlet.insert({aruKod,aruReferencia});
+}
+
+void Raktar::torol(string aruKod){
+    Aru* torlendoAru = keres(aruKod);
+    if(torlendoAru == nullptr){
+      throw runtime_error("Nem letezik ilyen aru!");
+    }
+
+    mRaktarKeszlet.erase(aruKod);
+
+    delete torlendoAru;
 }
 
 Aru* Raktar::keres(string aruKod){
-    Aru* keresettAru;
-    for(Aru* aru: mAruLista){
-        if((*aru).arukod() == aruKod){
-            keresettAru = aru;
-        }
+    return mRaktarKeszlet[aruKod];
+}
+
+void Raktar::kivesz(string aruKod, int mennyiseg){
+    Aru* hasznaltAru = keres(aruKod);
+
+    if(hasznaltAru == nullptr){
+      throw runtime_error("Nem letezik ilyen aru!");
+    } else if((*hasznaltAru).raktarKeszlet() < mennyiseg){
+        throw runtime_error("Nincs elegendo keszlet");
+    } else{
+       (*hasznaltAru).raktarKeszlet() -= mennyiseg;
+    }
+}
+
+void Raktar::feltolt(string aruKod, int mennyiseg){
+    Aru* hasznaltAru = keres(aruKod);
+
+    if(hasznaltAru == nullptr){
+      throw runtime_error("Nem letezik ilyen aru!");
     }
 
-    return keresettAru;
+    (*hasznaltAru).raktarKeszlet() += mennyiseg;
+}
+
+string Raktar::aruToString(string aruKod){
+    Aru* keresettAru = keres(aruKod);
+
+    if(keresettAru == nullptr){
+      throw runtime_error("Nem letezik ilyen aru!");
+    }
+
+    return (*keresettAru).toString();
+}
+
+void Raktar::keszletNyomtatas(){
+    for(auto& kulcsErtek : mRaktarKeszlet){
+        cout << aruToString(kulcsErtek.first) << endl;
+    }
 }

@@ -13,7 +13,7 @@ Ledig::Ledig(string nev, string gyarto, string arukod, int ar, int raktarKeszlet
 string Ledig::toString(){
     return Aru::toString() +
     ", Egysegar: " + to_string(Aru::ar()) + " g" +
-    ", Egyedi kod: " + Aru::arukod() +
+    ", Egyedi kod: " + Aru::aruKod() +
     ", Raktarkeszlet: " + to_string(Aru::raktarKeszlet()) + " g" +
     " (" + std::to_string((Aru::raktarKeszlet()/1000.0)) + " kg)";
 }

@@ -7,7 +7,7 @@ using namespace std;
 
 class Ledig : public Aru{
 public:
-    Ledig(string nev, string gyarto, string arukod, int ar, int raktarKeszlet);
+    Ledig(string nev, string gyarto, string aruKod, int ar, int raktarKeszlet);
     string toString() override;
 };
 #endif // _LEDIG_HPP_

@@ -14,7 +14,7 @@ DarabAru::DarabAru(string nev, string gyarto, string arukod, int ar, int raktarK
 string DarabAru::toString(){
     return Aru::toString() +
     ", Darabar: " + to_string(Aru::ar()) +
-    ", Vonalkod: " + Aru::arukod() +
-    (Aru::arukod().length() == 8?" (EAN8)":" (EAN13)") +
+    ", Vonalkod: " + Aru::aruKod() +
+    (Aru::aruKod().length() == 8?" (EAN8)":" (EAN13)") +
     ", Raktarkeszlet: " + to_string(Aru::raktarKeszlet()) + " db.";
 }

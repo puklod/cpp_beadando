@@ -8,13 +8,13 @@ Aru::Aru(string nev, string gyarto, string arukod, int ar, int raktarKeszlet): m
 try{
     stoi(arukod);
 } catch (const invalid_argument& e){
-    throw invalid_argument("Az arukod csak szamot tartalmazhat!");
+    cout << ("Az arukod csak szamot tartalmazhat!") << endl;
 }
 }
 
-string Aru::arukod() {return mArukod;}
+string Aru::aruKod() {return mArukod;}
 int Aru::ar() {return mAr;}
-int Aru::raktarKeszlet() {return mRaktarKeszlet;}
+int& Aru::raktarKeszlet() {return mRaktarKeszlet;}
 
 string Aru::toString(){
     return "Nev: " + mNev + ", Gyarto: " + mGyarto;

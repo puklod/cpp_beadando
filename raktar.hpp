@@ -1,7 +1,6 @@
 #ifndef _RAKTAR_HPP_
 #define _RAKTAR_HPP_
-#include <list>
-#include <memory>
+#include <unordered_map>
 #include <string>
 #include "aru.hpp"
 
@@ -9,11 +8,15 @@ using namespace std;
 
 class Raktar{
 public:
-    void hozzaad(Aru* aru);
+    void hozzaad(string aruKod, Aru* aruReferencia);
+    void torol(string aruKod);
     void kivesz(string aruKod, int mennyiseg);
+    void feltolt(string aruKod, int mennyiseg);
     Aru* keres(string aruKod);
+    string aruToString(string aruKod);
+    void keszletNyomtatas();
 private:
-    list<Aru*> mAruLista;
+    unordered_map<string,Aru*> mRaktarKeszlet;
 };
 
 #endif // _RAKTAR_HPP_
