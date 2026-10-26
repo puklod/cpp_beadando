@@ -5,7 +5,7 @@ using namespace std;
 
 void Menu::futtat(){
     string input;
-    while(Menu::mFutAProgram){
+    while(mFutAProgram){
         cout << "Mit szeretne csinalni?" << endl;
         cout << "1. Darabaru bevitele" << endl;
         cout << "2. Omlesztett aru bevitele" << endl;
@@ -17,6 +17,10 @@ void Menu::futtat(){
         stoi(input);
         }catch(const invalid_argument& e){
             cout << "Csak szamot lehet megadni!" << endl;
+        }
+
+        if(stoi(input) == 3){
+            mFutAProgram = false;
         }
     }
 }

@@ -7,8 +7,7 @@ using namespace std;
 Aru::Aru(string nev, string gyarto, string arukod, int ar, int raktarKeszlet): mNev(nev), mGyarto(gyarto), mArukod(arukod), mAr(ar), mRaktarKeszlet(raktarKeszlet){
 try{
     stoi(arukod);
-    throw 001;
-} catch (int errorCode){
+} catch (const invalid_argument& e){
     throw invalid_argument("Az arukod csak szamot tartalmazhat!");
 }
 }

@@ -29,3 +29,56 @@
 1792953712 h:\egyetem\c++\beadando\ledig.hpp
 	"aru.hpp"
 
+1793013427 source:e:\egyetem\cpp\cpp_beadando\aru.cpp
+	<iostream>
+	<string>
+	"aru.hpp"
+
+1793010571 e:\egyetem\cpp\cpp_beadando\aru.hpp
+	<string>
+
+1793010571 source:e:\egyetem\cpp\cpp_beadando\darab_aru.cpp
+	<iostream>
+	<string>
+	"aru.hpp"
+	"darab_aru.hpp"
+
+1793010571 e:\egyetem\cpp\cpp_beadando\darab_aru.hpp
+	<string>
+	"aru.hpp"
+
+1793013493 source:e:\egyetem\cpp\cpp_beadando\ledig.cpp
+	<iostream>
+	<string>
+	"ledig.hpp"
+
+1793010571 e:\egyetem\cpp\cpp_beadando\ledig.hpp
+	"aru.hpp"
+
+1793027587 source:e:\egyetem\cpp\cpp_beadando\main.cpp
+	<iostream>
+	"aru.hpp"
+	"darab_aru.hpp"
+	"ledig.hpp"
+	"menu.hpp"
+
+1793013039 e:\egyetem\cpp\cpp_beadando\menu.hpp
+	"raktar.hpp"
+
+1793024326 e:\egyetem\cpp\cpp_beadando\raktar.hpp
+	<list>
+	<memory>
+	<string>
+	"aru.hpp"
+
+1793013150 source:e:\egyetem\cpp\cpp_beadando\menu.cpp
+	<iostream>
+	"menu.hpp"
+
+1793025167 source:e:\egyetem\cpp\cpp_beadando\raktar.cpp
+	<iostream>
+	<list>
+	<string>
+	"raktar.hpp"
+	"aru.hpp"
+

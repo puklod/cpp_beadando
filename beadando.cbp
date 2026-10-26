@@ -32,8 +32,17 @@
 			<Add option="-Wall" />
 			<Add option="-fexceptions" />
 		</Compiler>
+		<Unit filename="aru.cpp" />
 		<Unit filename="aru.hpp" />
+		<Unit filename="darab_aru.cpp" />
+		<Unit filename="darab_aru.hpp" />
+		<Unit filename="ledig.cpp" />
+		<Unit filename="ledig.hpp" />
 		<Unit filename="main.cpp" />
+		<Unit filename="menu.cpp" />
+		<Unit filename="menu.hpp" />
+		<Unit filename="raktar.cpp" />
+		<Unit filename="raktar.hpp" />
 		<Extensions />
 	</Project>
 </CodeBlocks_project_file>
