@@ -1,5 +1,6 @@
 #include <iostream>
 #include <list>
+#include <set>
 #include <string>
 #include "raktar.hpp"
 #include "aru.hpp"
@@ -11,6 +12,8 @@ using namespace std;
 void Raktar::hozzaad(string aruKod, Aru* aruReferencia){
 
     mRaktarKeszlet.insert({aruKod,aruReferencia});
+
+    cout << (*aruReferencia).toString() + " hozzadva.";
 }
 
 void Raktar::torol(string aruKod){
@@ -64,4 +67,10 @@ void Raktar::keszletNyomtatas(){
     for(auto& kulcsErtek : mRaktarKeszlet){
         cout << aruToString(kulcsErtek.first) << endl;
     }
+}
+
+bool Raktar::megfeleloKodhossz(size_t hossz){
+    set<int> elfogadottHosszok = {8,10,13};
+
+    return elfogadottHosszok.count(hossz);
 }

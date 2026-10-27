@@ -85,21 +85,25 @@
 	"raktar.hpp"
 	"aru.hpp"
 
-1793048203 source:h:\egyetem\c++\beadando\menu.cpp
+1793137403 source:h:\egyetem\c++\beadando\menu.cpp
 	<iostream>
 	"menu.hpp"
-
-1793049761 h:\egyetem\c++\beadando\menu.hpp
+	"ledig.hpp"
+	"darab_aru.hpp"
 	"raktar.hpp"
 
-1793047726 h:\egyetem\c++\beadando\raktar.hpp
+1793137621 h:\egyetem\c++\beadando\menu.hpp
+	"raktar.hpp"
+
+1793131446 h:\egyetem\c++\beadando\raktar.hpp
 	<unordered_map>
 	<string>
 	"aru.hpp"
 
-1793047613 source:h:\egyetem\c++\beadando\raktar.cpp
+1793137333 source:h:\egyetem\c++\beadando\raktar.cpp
 	<iostream>
 	<list>
+	<set>
 	<string>
 	"raktar.hpp"
 	"aru.hpp"

@@ -15,6 +15,7 @@ public:
     Aru* keres(string aruKod);
     string aruToString(string aruKod);
     void keszletNyomtatas();
+    bool megfeleloKodhossz(size_t hossz);
 private:
     unordered_map<string,Aru*> mRaktarKeszlet;
 };
