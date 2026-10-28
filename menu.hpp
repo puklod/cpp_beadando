@@ -9,6 +9,7 @@ public:
     void kereses();
     void feltoltes();
     void kivetel();
+    bool csakSzamString(const string& vizsgaltSzoveg);
 private:
     bool mFutAProgram = true;
     Raktar mRaktar;

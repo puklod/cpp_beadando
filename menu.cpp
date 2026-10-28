@@ -19,13 +19,15 @@ void Menu::futtat(){
         cout << "7. Konzol torlese" << endl;
         cout << "8. Kilepes" << endl;
         cout << "\nValasztas: ";
-        cin >> input;
+        getline(cin,input);
 
         try{
             stoi(input);
         }catch(const invalid_argument& e){
             cout << "\nCsak szamot lehet megadni! \n" << endl;
             continue;
+        } catch(const out_of_range& e){
+            cout << "Tul nagy szam." <<endl;
         }
 
         int inputAsInt = stoi(input);
@@ -39,12 +41,13 @@ void Menu::futtat(){
             break;
         case 3:
             cout << "Torlendo aru kodja: ";
-            cin >> input;
+            getline(cin,input);
             try{
                 mRaktar.torol(input);
             } catch (const runtime_error& e){
                 cout << string(e.what()) + "\n" << endl;
             }
+            break;
         case 4:
             feltoltes();
             break;
@@ -66,6 +69,8 @@ void Menu::futtat(){
         case 8:
             mFutAProgram = false;
             break;
+        default:
+            cout << "Nincs ilyen opcio." << endl;
         }
     }
 }
@@ -77,37 +82,34 @@ void Menu::bevitel(){
 
     while(!megfeleloErtek){
         cout << "Arukod: ";
-        cin >> arukod;
+        getline(cin,input);
         try{
-            if(!mRaktar.megfeleloKodhossz(arukod.length())){
-                throw invalid_argument("Nem megfelelo kodhossz!\n");
+            if(!csakSzamString(input)){
+                throw invalid_argument("Az arukod csak szamokat tartalmazhat. ");
             }
-            if(mRaktar.keres(arukod) != nullptr){
-                throw invalid_argument("Ilyen kod mar letezik!");
+            if(!mRaktar.megfeleloKodhossz(input.length())){
+                throw invalid_argument("Nem megfelelo kodhossz. ");
             }
-            stoll(arukod);
+            if(mRaktar.keres(input) != nullptr){
+                throw invalid_argument("Ilyen kod mar letezik. ");
+            }
+            arukod = input;
             megfeleloErtek = true;
         } catch(invalid_argument& e){
-            if(string(e.what()) == "stoll"){
-                cout << "A kod csak szamokat tartalmazhat!\n";
-            }else {
-                cout << e.what();
-            }
+            cout << e.what();
 
             cout << "Ujraprobalja?" << endl;
             cout << "i/n: ";
-            cin.ignore();
-            if(cin.get() == 'i'){
+            getline(cin,input);
+            if(input == "i"){
                 continue;
             } else {
-                system("cls");
                 return;
             }
         }
     }
 
     cout << "Aru neve: ";
-    cin.ignore();
     getline(cin,nev);
     cout << "Gyarto: ";
     getline(cin,gyarto);
@@ -122,11 +124,16 @@ void Menu::bevitel(){
         }
 
         try{
-            cin >> input;
+            getline(cin,input);
+            if(!csakSzamString(input)){
+                    throw invalid_argument("Az ar csak szamokat tartalmazhat. ");
+            }
             ar = stoi(input);
             megfeleloErtek = true;
-        } catch(invalid_argument& e){
-            cout << "Az ar csak szamot tartalmazhat!" << endl;
+        } catch(const invalid_argument& e){
+            cout << e.what() << endl;
+        } catch(const out_of_range& e){
+            cout << "Tul nagy szam." <<endl;
         }
     }
 
@@ -139,11 +146,17 @@ void Menu::bevitel(){
         }
 
         try{
-            cin >> input;
+            getline(cin,input);
+            if(!csakSzamString(input)){
+                throw invalid_argument("A raktarkeszlet csak szamokat tartalmazhat. ");
+            }
+
             raktarKeszlet = stoi(input);
             megfeleloErtek = true;
-        } catch(invalid_argument& e){
-            cout << "Az ar csak szamot tartalmazhat!" << endl;
+        } catch(const invalid_argument& e){
+            cout << e.what() << endl;
+        } catch(const out_of_range& e){
+            cout << "Tul nagy szam." <<endl;
         }
     }
 
@@ -163,7 +176,7 @@ void Menu::kereses(){
     string input;
 
     cout << "Keresett aru kodja: ";
-    cin >> input;
+    getline(cin,input);
     Aru* talaltAru = mRaktar.keres(input);
     if(talaltAru == nullptr){
         cout << "Nincs ilyen aru.\n" << endl;
@@ -174,9 +187,10 @@ void Menu::kereses(){
 
 void Menu::feltoltes() {
 
-    string aruKod, mennyiseg;
+    string input,aruKod;
+    int mennyiseg;
     cout << "Feltoltendo arucikk kodja: ";
-    cin >> aruKod;
+    getline(cin,aruKod);
     Aru* bekertAru = mRaktar.keres(aruKod);
     if(bekertAru == nullptr){
         cout << "Nincs ilyen aru. \n" << endl;
@@ -187,54 +201,76 @@ void Menu::feltoltes() {
     while(!megfeleloInput){
         try{
             cout << "Feltoltendo mennyiseg: ";
-            cin >> mennyiseg;
-            stoi(mennyiseg);
+            getline(cin,input);
+            if(!csakSzamString(input)){
+                throw invalid_argument("A mennyiseg csak szamot tartalmazhat.");
+            }
+            mennyiseg = stoi(input);
+            if(INT_MAX - mennyiseg - (*bekertAru).raktarKeszlet() < 0){
+                throw out_of_range("Ezzel a szammal tullepnenk a raktarkapacitast.");
+            }
             megfeleloInput = true;
         } catch(const invalid_argument& e){
-            cout << "A mennyiseg csak szamot tartalmazhat." << endl;
+            cout << e.what() << endl;
         } catch(const out_of_range& e){
-            cout << "Tul nagy szam!";
+            cout << e.what() << endl;
         }
     }
 
-    mRaktar.feltolt(bekertAru,stoi(mennyiseg));
+    mRaktar.feltolt(bekertAru,mennyiseg);
 
     cout << "\n" << mennyiseg << " hozza lett adva a " << aruKod << " kodu termekhez." << endl;
-    cout << "Az uj mennyiseg: " << (*bekertAru).raktarKeszlet() << ((typeid(*bekertAru) == typeid(DarabAru))?" db.\n":" g.\n") <<  endl;
+    cout << "Az uj mennyiseg: " << (*bekertAru).raktarKeszlet() << ((typeid(*bekertAru) == typeid(DarabAru))?" db.":" g.") << "\n" <<  endl;
 }
 
 void Menu::kivetel() {
-    string aruKod, mennyiseg;
+    string input,aruKod;
+    int mennyiseg;
     cout << "Keresett arucikk kodja: ";
-    cin >> aruKod;
+    getline(cin,aruKod);
     Aru* bekertAru = mRaktar.keres(aruKod);
     if(bekertAru == nullptr){
         cout << "Nincs ilyen aru. \n" << endl;
         return;
     }
 
-    cout << "A jelenlegi mennyiseg: " << (*bekertAru).raktarKeszlet() << ((typeid(*bekertAru) == typeid(DarabAru))?" db.\n":" g.\n") << endl;
+    cout << "A jelenlegi mennyiseg: " << (*bekertAru).raktarKeszlet() << ((typeid(*bekertAru) == typeid(DarabAru))?" db.":" g.") << "\n" << endl;
 
     bool megfeleloInput = false;
     while(!megfeleloInput){
         try{
             cout << "Mennyit szeretnenk kivenni: ";
-            cin >> mennyiseg;
-            stoi(mennyiseg);
+            getline(cin,input);
+            if(!csakSzamString(input)){
+                throw invalid_argument("A mennyiseg csak szamot tartalmazhat.");
+            }
+            mennyiseg = stoi(input);
             megfeleloInput = true;
         } catch(const invalid_argument& e){
-            cout << "A mennyiseg csak szamot tartalmazhat." << endl;
-        } catch(const out_of_range& e){
-            cout << "Tul nagy szam!";
+            if(string(e.what()) == "stoi"){
+                cout << "Tul nagy szam!";
+            } else{
+                cout << e.what() << endl;
+            }
         }
     }
 
     try{
-        mRaktar.kivesz(bekertAru,stoi(mennyiseg));
+        mRaktar.kivesz(bekertAru,mennyiseg);
     } catch(const runtime_error& e){
         cout << e.what() << endl;
     }
 
     cout << "\n" << mennyiseg << " ki lett veve a " << aruKod << " kodu termekbol." << endl;
-    cout << "Az uj mennyiseg: " << (*bekertAru).raktarKeszlet() << ((typeid(*bekertAru) == typeid(DarabAru))?" db.":" g.\n") << endl;
+    cout << "Az uj mennyiseg: " << (*bekertAru).raktarKeszlet() << ((typeid(*bekertAru) == typeid(DarabAru))?" db.":" g.") << "\n" << endl;
+}
+
+bool Menu::csakSzamString(const string& vizsgaltSzoveg){
+    for(const char& karakter : vizsgaltSzoveg){
+        if(!isdigit(karakter)){
+            return false;
+        }
+    }
+
+    return true;
 }

@@ -1,5 +1,5 @@
 # depslib dependency file v1.0
-1793047798 source:h:\egyetem\c++\beadando\aru.cpp
+1793216485 source:h:\egyetem\c++\beadando\aru.cpp
 	<iostream>
 	<string>
 	"aru.hpp"
@@ -91,22 +91,23 @@
 	"ledig.hpp"
 	"darab_aru.hpp"
 
-1793137403 source:h:\egyetem\c++\beadando\menu.cpp
+1793223009 source:h:\egyetem\c++\beadando\menu.cpp
 	<iostream>
 	"menu.hpp"
 	"ledig.hpp"
 	"darab_aru.hpp"
 	"raktar.hpp"
 
-1793137621 h:\egyetem\c++\beadando\menu.hpp
+1793218986 h:\egyetem\c++\beadando\menu.hpp
 	"raktar.hpp"
 
-1793131446 h:\egyetem\c++\beadando\raktar.hpp
+1793215530 h:\egyetem\c++\beadando\raktar.hpp
 	<unordered_map>
 	<string>
+	<list>
 	"aru.hpp"
 
-1793137333 source:h:\egyetem\c++\beadando\raktar.cpp
+1793215530 source:h:\egyetem\c++\beadando\raktar.cpp
 	<iostream>
 	<list>
 	<set>
