@@ -2,20 +2,24 @@
 #define _RAKTAR_HPP_
 #include <unordered_map>
 #include <string>
+#include <list>
 #include "aru.hpp"
 
 using namespace std;
 
 class Raktar{
 public:
-    void hozzaad(string aruKod, Aru* aruReferencia);
-    void torol(string aruKod);
-    void kivesz(string aruKod, int mennyiseg);
-    void feltolt(string aruKod, int mennyiseg);
-    Aru* keres(string aruKod);
-    string aruToString(string aruKod);
-    void keszletNyomtatas();
+    void hozzaad(const string& aruKod, Aru* aruReferencia);
+    void torol(const string& aruKod);
+    void kivesz(Aru* aru, int mennyiseg);
+    void kivesz(const string& aruKod, int mennyiseg);
+    void feltolt(Aru* aru, int mennyiseg);
+    void feltolt(const string& aruKod, int mennyiseg);
+    Aru* keres(const string& aruKod);
+    string aruToString(const string& aruKod);
+    list<string> aruLista();
     bool megfeleloKodhossz(size_t hossz);
+    int meret();
 private:
     unordered_map<string,Aru*> mRaktarKeszlet;
 };

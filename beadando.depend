@@ -32,58 +32,64 @@
 1793040508 h:\egyetem\c++\beadando\ledig.hpp
 	"aru.hpp"
 
-1793013427 source:e:\egyetem\cpp\cpp_beadando\aru.cpp
+1793185276 source:e:\egyetem\cpp\cpp_beadando\aru.cpp
 	<iostream>
 	<string>
 	"aru.hpp"
 
-1793010571 e:\egyetem\cpp\cpp_beadando\aru.hpp
+1793185276 e:\egyetem\cpp\cpp_beadando\aru.hpp
 	<string>
 
-1793010571 source:e:\egyetem\cpp\cpp_beadando\darab_aru.cpp
+1793185276 source:e:\egyetem\cpp\cpp_beadando\darab_aru.cpp
 	<iostream>
 	<string>
 	"aru.hpp"
 	"darab_aru.hpp"
 
-1793010571 e:\egyetem\cpp\cpp_beadando\darab_aru.hpp
+1793185276 e:\egyetem\cpp\cpp_beadando\darab_aru.hpp
 	<string>
 	"aru.hpp"
 
-1793013493 source:e:\egyetem\cpp\cpp_beadando\ledig.cpp
+1793185276 source:e:\egyetem\cpp\cpp_beadando\ledig.cpp
 	<iostream>
 	<string>
 	"ledig.hpp"
 
-1793010571 e:\egyetem\cpp\cpp_beadando\ledig.hpp
+1793185276 e:\egyetem\cpp\cpp_beadando\ledig.hpp
 	"aru.hpp"
 
-1793027587 source:e:\egyetem\cpp\cpp_beadando\main.cpp
+1793185276 source:e:\egyetem\cpp\cpp_beadando\main.cpp
 	<iostream>
 	"aru.hpp"
 	"darab_aru.hpp"
 	"ledig.hpp"
 	"menu.hpp"
 
-1793013039 e:\egyetem\cpp\cpp_beadando\menu.hpp
+1793196816 e:\egyetem\cpp\cpp_beadando\menu.hpp
 	"raktar.hpp"
 
-1793024326 e:\egyetem\cpp\cpp_beadando\raktar.hpp
-	<list>
-	<memory>
+1793198880 e:\egyetem\cpp\cpp_beadando\raktar.hpp
+	<unordered_map>
 	<string>
+	<list>
 	"aru.hpp"
 
-1793013150 source:e:\egyetem\cpp\cpp_beadando\menu.cpp
+1793199762 source:e:\egyetem\cpp\cpp_beadando\menu.cpp
 	<iostream>
 	"menu.hpp"
+	"ledig.hpp"
+	"darab_aru.hpp"
+	"raktar.hpp"
 
-1793025167 source:e:\egyetem\cpp\cpp_beadando\raktar.cpp
+1793198933 source:e:\egyetem\cpp\cpp_beadando\raktar.cpp
 	<iostream>
 	<list>
+	<set>
 	<string>
 	"raktar.hpp"
 	"aru.hpp"
+	"ledig.hpp"
+	"darab_aru.hpp"
 
 1793137403 source:h:\egyetem\c++\beadando\menu.cpp
 	<iostream>

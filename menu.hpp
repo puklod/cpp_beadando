@@ -6,6 +6,9 @@ class Menu{
 public:
     void futtat();
     void bevitel();
+    void kereses();
+    void feltoltes();
+    void kivetel();
 private:
     bool mFutAProgram = true;
     Raktar mRaktar;

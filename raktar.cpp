@@ -9,14 +9,11 @@
 
 using namespace std;
 
-void Raktar::hozzaad(string aruKod, Aru* aruReferencia){
-
+void Raktar::hozzaad(const string& aruKod, Aru* aruReferencia){
     mRaktarKeszlet.insert({aruKod,aruReferencia});
-
-    cout << (*aruReferencia).toString() + " hozzadva.";
 }
 
-void Raktar::torol(string aruKod){
+void Raktar::torol(const string& aruKod){
     Aru* torlendoAru = keres(aruKod);
     if(torlendoAru == nullptr){
       throw runtime_error("Nem letezik ilyen aru!");
@@ -27,23 +24,39 @@ void Raktar::torol(string aruKod){
     delete torlendoAru;
 }
 
-Aru* Raktar::keres(string aruKod){
-    return mRaktarKeszlet[aruKod];
+Aru* Raktar::keres(const string& aruKod){
+    auto it = mRaktarKeszlet.find(aruKod);
+    if(it == mRaktarKeszlet.end()){
+        return nullptr;
+    }
+    return it -> second;
 }
 
-void Raktar::kivesz(string aruKod, int mennyiseg){
+void Raktar::kivesz(Aru* aru, int mennyiseg){
+    if((*aru).raktarKeszlet() < mennyiseg){
+        throw runtime_error("Nincs elegendo keszlet.");
+    }
+
+    (*aru).raktarKeszlet() -= mennyiseg;
+}
+
+void Raktar::kivesz(const string& aruKod, int mennyiseg){
     Aru* hasznaltAru = keres(aruKod);
 
     if(hasznaltAru == nullptr){
       throw runtime_error("Nem letezik ilyen aru!");
     } else if((*hasznaltAru).raktarKeszlet() < mennyiseg){
-        throw runtime_error("Nincs elegendo keszlet");
+        throw runtime_error("Nincs elegendo keszlet.");
     } else{
        (*hasznaltAru).raktarKeszlet() -= mennyiseg;
     }
 }
 
-void Raktar::feltolt(string aruKod, int mennyiseg){
+void Raktar::feltolt(Aru* aru, int mennyiseg){
+    (*aru).raktarKeszlet() += mennyiseg;
+}
+
+void Raktar::feltolt(const string& aruKod, int mennyiseg){
     Aru* hasznaltAru = keres(aruKod);
 
     if(hasznaltAru == nullptr){
@@ -53,7 +66,7 @@ void Raktar::feltolt(string aruKod, int mennyiseg){
     (*hasznaltAru).raktarKeszlet() += mennyiseg;
 }
 
-string Raktar::aruToString(string aruKod){
+string Raktar::aruToString(const string& aruKod){
     Aru* keresettAru = keres(aruKod);
 
     if(keresettAru == nullptr){
@@ -63,14 +76,21 @@ string Raktar::aruToString(string aruKod){
     return (*keresettAru).toString();
 }
 
-void Raktar::keszletNyomtatas(){
+list<string> Raktar::aruLista(){
+    list<string> aruLista;
     for(auto& kulcsErtek : mRaktarKeszlet){
-        cout << aruToString(kulcsErtek.first) << endl;
+        aruLista.push_back((*kulcsErtek.second).toString());
     }
+
+    return aruLista;
 }
 
 bool Raktar::megfeleloKodhossz(size_t hossz){
     set<int> elfogadottHosszok = {8,10,13};
 
     return elfogadottHosszok.count(hossz);
+}
+
+int Raktar::meret(){
+    return mRaktarKeszlet.size();
 }
