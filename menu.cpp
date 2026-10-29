@@ -1,4 +1,5 @@
 #include <iostream>
+#include <fstream>
 #include "menu.hpp"
 #include "ledig.hpp"
 #include "darab_aru.hpp"
@@ -7,6 +8,7 @@
 using namespace std;
 
 void Menu::futtat(){
+    char valasztas;
     string input;
     while(mFutAProgram){
         cout << "Mit szeretne csinalni?" << endl;
@@ -17,29 +19,34 @@ void Menu::futtat(){
         cout << "5. Keszletkivetel a raktarbol" << endl;
         cout << "6. Arukeszlet kilistazasa" << endl;
         cout << "7. Konzol torlese" << endl;
-        cout << "8. Kilepes" << endl;
+        cout << "q. Kilepes" << endl;
+
+        if(letizikRaktarFajl("raktar.txt")){
+            cout << "t. Korabbi raktar betoltese (jelenlegit felulirva)" << endl;
+        }
+
+        if(mRaktar.meret() > 0){
+            cout << "m. Jelenlegi raktar kimentese faljba (korabbit felulirva)" << endl;
+        }
+
         cout << "\nValasztas: ";
         getline(cin,input);
 
-        try{
-            stoi(input);
-        }catch(const invalid_argument& e){
-            cout << "\nCsak szamot lehet megadni! \n" << endl;
+        if(input.length() > 1){
+            cout << "Nincs ilyen opcio" << endl;
             continue;
-        } catch(const out_of_range& e){
-            cout << "Tul nagy szam." <<endl;
         }
 
-        int inputAsInt = stoi(input);
+        valasztas = input[0];
 
-        switch(inputAsInt){
-        case 1:
+        switch(valasztas){
+        case '1':
             bevitel();
             break;
-        case 2:
+        case '2':
             kereses();
             break;
-        case 3:
+        case '3':
             cout << "Torlendo aru kodja: ";
             getline(cin,input);
             try{
@@ -48,26 +55,34 @@ void Menu::futtat(){
                 cout << string(e.what()) + "\n" << endl;
             }
             break;
-        case 4:
+        case '4':
             feltoltes();
             break;
-        case 5:
+        case '5':
             kivetel();
             break;
-        case 6:
+        case '6':
             if(mRaktar.meret() == 0){
                 cout << "A raktar jelenleg ures. \n" << endl;
             } else{
                 for(const string& aru: mRaktar.aruLista()){
                     cout << aru << endl;
                 }
+                cout << "\n" << endl;
             }
             break;
-        case 7:
+        case '7':
             cout << "\033[2J\033[1;1H";
             break;
-        case 8:
+        case 'q':
             mFutAProgram = false;
+            break;
+        case 't':
+            mRaktar.pucol();
+            mRaktar.betoltesFajlbol("raktar.txt");
+            break;
+        case 'm':
+            mRaktar.fajlbaMentes("raktar.txt");
             break;
         default:
             cout << "Nincs ilyen opcio." << endl;
@@ -118,9 +133,9 @@ void Menu::bevitel(){
     while(!megfeleloErtek){
 
         if(arukod.length() == 10){
-            cout << "Kilos ar: ";
+            cout << "Kilos ar (Ft.): ";
         } else {
-            cout << "Darabar: ";
+            cout << "Darabar (Ft.): ";
         }
 
         try{
@@ -142,7 +157,7 @@ void Menu::bevitel(){
         if(arukod.length() == 10){
             cout << "Kezdo arukeszlet(g): ";
         } else {
-            cout << "Kezdo arumennyiseg(db): ";
+            cout << "Kezdo arumennyiseg(db.): ";
         }
 
         try{
@@ -207,13 +222,13 @@ void Menu::feltoltes() {
             }
             mennyiseg = stoi(input);
             if(INT_MAX - mennyiseg - (*bekertAru).raktarKeszlet() < 0){
-                throw out_of_range("Ezzel a szammal tullepnenk a raktarkapacitast.");
+                throw invalid_argument ("Ezzel a szammal tullepnenk a raktarkapacitast.");
             }
             megfeleloInput = true;
         } catch(const invalid_argument& e){
             cout << e.what() << endl;
         } catch(const out_of_range& e){
-            cout << e.what() << endl;
+            cout << "Tul nagy szam.\n" << endl;
         }
     }
 
@@ -247,22 +262,19 @@ void Menu::kivetel() {
             mennyiseg = stoi(input);
             megfeleloInput = true;
         } catch(const invalid_argument& e){
-            if(string(e.what()) == "stoi"){
-                cout << "Tul nagy szam!";
-            } else{
                 cout << e.what() << endl;
-            }
+        } catch(const out_of_range& e){
+            cout << "Tul nagy szam.\n" << endl;
         }
     }
 
     try{
         mRaktar.kivesz(bekertAru,mennyiseg);
+        cout << "\n" << mennyiseg << " ki lett veve a " << aruKod << " kodu termekbol." << endl;
+        cout << "Az uj mennyiseg: " << (*bekertAru).raktarKeszlet() << ((typeid(*bekertAru) == typeid(DarabAru))?" db.":" g.") << "\n" << endl;
     } catch(const runtime_error& e){
         cout << e.what() << endl;
     }
-
-    cout << "\n" << mennyiseg << " ki lett veve a " << aruKod << " kodu termekbol." << endl;
-    cout << "Az uj mennyiseg: " << (*bekertAru).raktarKeszlet() << ((typeid(*bekertAru) == typeid(DarabAru))?" db.":" g.") << "\n" << endl;
 }
 
 bool Menu::csakSzamString(const string& vizsgaltSzoveg){
@@ -273,4 +285,10 @@ bool Menu::csakSzamString(const string& vizsgaltSzoveg){
     }
 
     return true;
+}
+
+bool Menu::letizikRaktarFajl(const string& fileNev){
+    ifstream file(fileNev);
+
+    return file.is_open();
 }

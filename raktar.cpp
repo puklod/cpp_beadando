@@ -1,7 +1,11 @@
 #include <iostream>
 #include <list>
 #include <set>
+#include <vector>
 #include <string>
+#include <ostream>
+#include <fstream>
+#include <sstream>
 #include "raktar.hpp"
 #include "aru.hpp"
 #include "ledig.hpp"
@@ -9,8 +13,8 @@
 
 using namespace std;
 
-void Raktar::hozzaad(const string& aruKod, Aru* aruReferencia){
-    mRaktarKeszlet.insert({aruKod,aruReferencia});
+void Raktar::hozzaad(const string& aruKod, Aru* aruPointer){
+    mRaktarKeszlet.insert({aruKod,aruPointer});
 }
 
 void Raktar::torol(const string& aruKod){
@@ -34,7 +38,7 @@ Aru* Raktar::keres(const string& aruKod){
 
 void Raktar::kivesz(Aru* aru, int mennyiseg){
     if((*aru).raktarKeszlet() < mennyiseg){
-        throw runtime_error("Nincs elegendo keszlet.");
+        throw runtime_error("Nincs elegendo keszlet, nem tortent valtozas.\n");
     }
 
     (*aru).raktarKeszlet() -= mennyiseg;
@@ -93,4 +97,61 @@ bool Raktar::megfeleloKodhossz(size_t hossz){
 
 int Raktar::meret(){
     return mRaktarKeszlet.size();
+}
+
+void Raktar::fajlbaMentes(const string& fileNev){
+    ofstream file(fileNev);
+    if(!file.is_open()) return;
+
+    for(auto& kulcsErtek : mRaktarKeszlet){
+        Aru* aru = (kulcsErtek.second);
+
+        if(typeid(*aru) == typeid(Ledig)){
+            file << "Ledig;";
+        } else {
+            file << "Darab;";
+        }
+
+        file << (*aru).nev() << ";" << (*aru).gyarto() << ";" << (*aru).aruKod() << ";" << (*aru).ar() << ";" << (*aru).raktarKeszlet() << "\n";
+
+    }
+}
+
+void Raktar::betoltesFajlbol(const string& fileNev){
+    ifstream file(fileNev);
+    if(!file.is_open()) return;
+
+    string sor;
+
+    while(getline(file,sor)){
+        vector<string> adatok;
+        stringstream ss(sor);
+
+        string adat;
+        while(getline(ss,adat,';')){
+            adatok.push_back(adat);
+        }
+
+        Aru* aru;
+
+        if(adatok[0] == "Ledig"){
+            aru = new Ledig(adatok[1], adatok[2], adatok[3], stoi(adatok[4]), stoi(adatok[5]));
+        } else{
+            aru = new DarabAru(adatok[1], adatok[2], adatok[3], stoi(adatok[4]), stoi(adatok[5]));
+        }
+
+        mRaktarKeszlet.insert({(*aru).aruKod(),aru});
+    }
+}
+
+void Raktar::pucol(){
+    for(auto& kulcsErtek : mRaktarKeszlet){
+        delete (kulcsErtek.second);
+    }
+
+    mRaktarKeszlet.clear();
+}
+
+Raktar::~Raktar(){
+    pucol();
 }

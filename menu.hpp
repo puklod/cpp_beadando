@@ -10,6 +10,7 @@ public:
     void feltoltes();
     void kivetel();
     bool csakSzamString(const string& vizsgaltSzoveg);
+    bool letizikRaktarFajl(const string& fileNev);
 private:
     bool mFutAProgram = true;
     Raktar mRaktar;

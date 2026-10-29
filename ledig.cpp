@@ -11,9 +11,13 @@ Ledig::Ledig(string nev, string gyarto, string arukod, int ar, int raktarKeszlet
 }
 
 string Ledig::toString(){
+    double mennyisegKilo = Aru::raktarKeszlet()/1000.0;
+    double ertekKilo = mennyisegKilo * Aru::ar();
+
     return Aru::toString() +
-    ", Egysegar: " + to_string(Aru::ar()) + " g" +
+    ", Egysegar: " + to_string(Aru::ar()) + " Ft./kg" +
     ", Egyedi kod: " + Aru::aruKod() +
-    ", Raktarkeszlet: " + to_string(Aru::raktarKeszlet()) + " g" +
-    " (" + std::to_string((Aru::raktarKeszlet()/1000.0)) + " kg)";
+    ", Raktarkeszlet: " + to_string(Aru::raktarKeszlet()) + "g" +
+    " (" + to_string(mennyisegKilo) + "kg)" +
+    ", Keszletertek: " + to_string(ertekKilo) + "Ft.";
 }

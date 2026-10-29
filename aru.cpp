@@ -12,6 +12,8 @@ Aru::Aru(string nev, string gyarto, string arukod, int ar, int raktarKeszlet): m
     }
 }
 
+string Aru::nev() {return mNev;}
+string Aru::gyarto() {return mGyarto;}
 string Aru::aruKod() {return mArukod;}
 int Aru::ar() {return mAr;}
 int& Aru::raktarKeszlet() {return mRaktarKeszlet;}

@@ -16,5 +16,6 @@ string DarabAru::toString(){
     ", Darabar: " + to_string(Aru::ar()) +
     ", Vonalkod: " + Aru::aruKod() +
     (Aru::aruKod().length() == 8?" (EAN8)":" (EAN13)") +
-    ", Raktarkeszlet: " + to_string(Aru::raktarKeszlet()) + " db.";
+    ", Raktarkeszlet: " + to_string(Aru::raktarKeszlet()) + " db." +
+    ", Keszletertek: " + to_string(Aru::raktarKeszlet() * Aru::ar()) + " Ft.";
 }

@@ -20,6 +20,10 @@ public:
     list<string> aruLista();
     bool megfeleloKodhossz(size_t hossz);
     int meret();
+    void fajlbaMentes(const string& fileNev);
+    void betoltesFajlbol(const string& fileNev);
+    void pucol();
+    ~Raktar();
 private:
     unordered_map<string,Aru*> mRaktarKeszlet;
 };
