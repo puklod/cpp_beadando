@@ -1,3 +1,0 @@
-Darab;Teszt;Van;12345678;43;23
-Ledig;Banan;Chikita;1234567890;32;10
-Darab;Megnemmondom;Nincs;1234567891234;43;23

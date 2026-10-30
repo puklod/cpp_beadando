@@ -7,21 +7,32 @@ using namespace std;
 
 class Aru{
 public:
-    string nev();
-    string gyarto();
-    string aruKod();
-    int ar();
-    int& raktarKeszlet();
-    virtual string toString();
+    // Getterek
+    string nev() const;
+    string gyarto() const;
+    string arukod() const;
+    int ar() const;
+    int raktarkeszlet() const;
+    // A sima árunak nincs mértékegysége, de a másik kettőnél kell tudni, mit írjanak ki
+    virtual string mertekegyseg() const = 0;
+
+    // Két setter a raktárkészlethez
+    void hozzaad(int mennyiseg);
+    void kivesz(int mennyiseg);
+
+
+    virtual string toString() const;
     virtual ~Aru() = default;
+
 protected:
-    Aru(string nev, string gyarto, string aruKod, int ar, int raktarKeszlet);
+    Aru(const string& nev, const string& gyarto, const string& aruKod, int ar, int raktarKeszlet);
+
 private:
     string mNev;
     string mGyarto;
     string mArukod;
     int mAr;
-    int mRaktarKeszlet;
+    int mRaktarkeszlet;
 };
 
 #endif // _ARU_HPP_

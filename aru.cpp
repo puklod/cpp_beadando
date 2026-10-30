@@ -4,7 +4,8 @@
 
 using namespace std;
 
-Aru::Aru(string nev, string gyarto, string arukod, int ar, int raktarKeszlet): mNev(nev), mGyarto(gyarto), mArukod(arukod), mAr(ar), mRaktarKeszlet(raktarKeszlet){
+Aru::Aru(const string& nev, const string& gyarto, const string& arukod, int ar, int raktarkeszlet): mNev(nev), mGyarto(gyarto), mArukod(arukod), mAr(ar), mRaktarkeszlet(raktarkeszlet){
+    // Ha az árukód valamelyik karaktere nem szám, hibát dobunk
     for(const char& karakter : arukod){
         if(!isdigit(karakter)){
             throw invalid_argument("Az arukod csak szamokat tartalmazhat. ");
@@ -12,12 +13,18 @@ Aru::Aru(string nev, string gyarto, string arukod, int ar, int raktarKeszlet): m
     }
 }
 
-string Aru::nev() {return mNev;}
-string Aru::gyarto() {return mGyarto;}
-string Aru::aruKod() {return mArukod;}
-int Aru::ar() {return mAr;}
-int& Aru::raktarKeszlet() {return mRaktarKeszlet;}
+// Getterek definiálása
+string Aru::nev() const {return mNev;}
+string Aru::gyarto() const {return mGyarto;}
+string Aru::arukod() const {return mArukod;}
+int Aru::ar() const {return mAr;}
+int Aru::raktarkeszlet() const {return mRaktarkeszlet;}
 
-string Aru::toString(){
+// Két setter definiálása
+void Aru::hozzaad(int mennyiseg) {mRaktarkeszlet += mennyiseg;}
+void Aru::kivesz(int mennyiseg) {mRaktarkeszlet -= mennyiseg;}
+
+
+string Aru::toString() const{
     return "Nev: " + mNev + ", Gyarto: " + mGyarto;
 }
